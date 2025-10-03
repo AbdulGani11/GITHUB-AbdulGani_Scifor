@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Box Model Assignment</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            /* box-sizing: content-box; - Default behavior where width applies only to content, then padding and border are added on top  */
+        }
+
+        .box {
+            width: 200px;
+            height: 100px;
+            background-color: lightgray;
+            padding: 20px;
+            border: 5px solid blue;
+            margin: 15px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        This is some text inside the div element demonstrating the CSS box model.
+    </div>
+</body>
+
+</html>
