@@ -1,0 +1,17 @@
+// Light theme
+.light-theme {
+  $bg-color: white;
+  $text-color: black;
+
+  background-color: $bg-color;
+  color: $text-color;
+}
+
+// Dark theme
+.dark-theme {
+  $bg-color: black;
+  $text-color: white;
+
+  background-color: $bg-color;
+  color: $text-color;
+}
