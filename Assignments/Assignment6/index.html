@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* Default styles for mobile (0px - 768px) */
+        .container {
+            display: flex;
+            flex-direction: column;
+            /* Mobile default: stacked */
+            gap: 20px;
+        }
+
+        .box {
+            width: 100%;
+            height: 150px;
+            background: lightblue;
+            text-align: center;
+            line-height: 150px;
+        }
+
+        /* Tablet & Desktop: Side by side */
+        @media (min-width: 769px) {
+            .container {
+                flex-direction: row;
+            }
+
+            .box {
+                flex: 1;
+                width: auto;
+                background-color: bisque;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="box">Box 1</div>
+        <div class="box">Box 2</div>
+        <div class="box">Box 3</div>
+    </div>
+</body>
+
+</html>
