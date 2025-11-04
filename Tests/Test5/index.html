@@ -1,7 +1,15 @@
+<!-- 
+Combine universal selector with pseudo-class: 
+ 
+Use the universal selector with :hover to change the background color of any element when hovered. -->
+
 <!DOCTYPE html>
 <html>
 
 <head>
+    <!-- It should be only elements when I hover, not when I hover on any place. -->
+
+    <!-- :not() is a negation pseudo-class that excludes specific elements from being selected. -->
     <style>
         *:not(body):not(html):hover {
             background-color: lightblue;
