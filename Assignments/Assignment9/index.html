@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bootstrap Assignment</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container my-5">
+      <!-- 1. Bootstrap Buttons and Outline Buttons in a Grid -->
+      <div class="card p-4 mb-5">
+        <h4 class="mb-4">1. Bootstrap Buttons in Grid</h4>
+
+        <!-- Solid Buttons -->
+        <h5 class="mb-3">Solid Buttons</h5>
+        <div class="row g-3 mb-4">
+          <div class="col-6 col-md-3">
+            <button class="btn btn-primary w-100">Primary</button>
+          </div>
+
+          <div class="col-6 col-md-3">
+            <button class="btn btn-secondary w-100">Secondary</button>
+          </div>
+
+          <div class="col-6 col-md-3">
+            <button class="btn btn-success w-100">Success</button>
+          </div>
+
+          <div class="col-6 col-md-3">
+            <button class="btn btn-danger w-100">Danger</button>
+          </div>
+
+          <div class="col-6 col-md-3">
+            <button class="btn btn-warning w-100">Warning</button>
+          </div>
+
+          <div class="col-6 col-md-3">
+            <button class="btn btn-info w-100">Info</button>
+          </div>
+
+          <div class="col-6 col-md-3">
+            <button class="btn btn-light w-100">Light</button>
+          </div>
+
+          <div class="col-6 col-md-3">
+            <button class="btn btn-dark w-100">Dark</button>
+          </div>
+        </div>
+
+        <!-- Outline Buttons -->
+        <h5 class="mb-3">Outline Buttons</h5>
+        <div class="row g-3">
+          <div class="col-6 col-md-3">
+            <button class="btn btn-outline-primary w-100">
+              Outline Primary
+            </button>
+          </div>
+
+          <div class="col-6 col-md-3">
+            <button class="btn btn-outline-secondary w-100">
+              Outline Secondary
+            </button>
+          </div>
+
+          <div class="col-6 col-md-3">
+            <button class="btn btn-outline-success w-100">
+              Outline Success
+            </button>
+          </div>
+
+          <div class="col-6 col-md-3">
+            <button class="btn btn-outline-danger w-100">Outline Danger</button>
+          </div>
+
+          <div class="col-6 col-md-3">
+            <button class="btn btn-outline-warning w-100">
+              Outline Warning
+            </button>
+          </div>
+
+          <div class="col-6 col-md-3">
+            <button class="btn btn-outline-info w-100">Outline Info</button>
+          </div>
+
+          <div class="col-6 col-md-3">
+            <button class="btn btn-outline-light w-100 text-primary">
+              Outline Light
+            </button>
+          </div>
+
+          <div class="col-6 col-md-3">
+            <button class="btn btn-outline-dark w-100">Outline Dark</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. Button that Shows Spinner When Clicked -->
+      <div class="card p-4">
+        <h4 class="mb-3">2. Button with Spinner on Click</h4>
+
+        <button
+          class="btn btn-primary btn-lg"
+          id="loadBtn"
+          onclick="showSpinner()"
+        >
+          Click Me to Load
+        </button>
+      </div>
+    </div>
+
+    <script>
+      function showSpinner() {
+        const btn = document.getElementById("loadBtn");
+
+        // Change button to loading state
+        btn.disabled = true;
+        btn.innerHTML =
+          '<span class="spinner-border spinner-border-sm me-2"></span>Loading...';
+
+        // After 3 seconds, reset button
+        setTimeout(() => {
+          btn.disabled = false;
+          btn.innerHTML = "Click Me to Load";
+        }, 3000);
+      }
+    </script>
+  </body>
+</html>
