@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student Registration Form - Foundation CSS</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/foundation-sites@6.7.4/dist/css/foundation.min.css"
+    />
+  </head>
+  <body>
+    <div class="grid-container" style="margin-top: 3rem">
+      <div class="grid-x">
+        <div class="cell medium-6" style="margin: 0 auto">
+          <h2 style="font-family: serif; text-align: center">
+            Student Registration Form
+          </h2>
+
+          <form action="#" method="POST">
+            <!-- full name -->
+            <label>
+              Full Name
+              <input
+                type="text"
+                name="fullName"
+                placeholder="Enter your full name"
+                required
+              />
+            </label>
+
+            <!-- Email -->
+            <label>
+              Email Address
+              <input
+                type="email"
+                name="email"
+                placeholder="your@email.com"
+                required
+              />
+            </label>
+
+            <!-- pass -->
+            <label>
+              Password
+              <input
+                type="password"
+                name="password"
+                placeholder="Enter password"
+                required
+              />
+            </label>
+
+            <!-- confim pass -->
+            <label>
+              Confirm Password
+              <input
+                type="password"
+                name="confirmPassword"
+                placeholder="Confirm password"
+                required
+              />
+            </label>
+
+            <!-- He/She -->
+            <fieldset>
+              <legend>Gender</legend>
+              <label>
+                <input type="radio" name="gender" value="male" required />
+                Male
+              </label>
+              <label>
+                <input type="radio" name="gender" value="female" />
+                Female
+              </label>
+            </fieldset>
+
+            <!-- DOB -->
+            <label>
+              Date of Birth
+              <input type="date" name="dob" required />
+            </label>
+
+            <!-- Sumbit -->
+            <button type="submit" class="button expanded">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
