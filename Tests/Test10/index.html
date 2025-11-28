@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Test10</title>
+</head>
+
+<body>
+    <!-- Check if a person is eligible for a loan:
+
+    Age must be > 21
+
+    Salary must be > 20000
+    Use AND (&&) operator. -->
+    <script>
+        let Age = Number(prompt("Enter Age:"));
+        let Salary = Number(prompt("Enter Salary:"));
+
+        if (Age > 21 && Salary > 20000) {
+            document.write("This Person is eligible for a loan");
+        } else {
+            document.write("This Person is not eligible for a loan");
+        }
+    </script>
+</body>
+
+</html>
