@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>print object properties using for..in loop</title>
+</head>
+
+<body>
+    <script>
+        let car = {
+            brand: "Toyota",
+            model: "Camry",
+            year: 2023,
+            color: "White"
+        };
+
+        for (let key in car) {
+            console.log(`${key} : ${car[key]}\n`)
+        }
+    </script>
+</body>
+
+</html>
