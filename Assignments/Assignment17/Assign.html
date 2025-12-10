@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // create a calculator
+
+        const calculator = function (Num1, Num2) {
+            multiply(Num1, Num2)
+            Addtion(Num1, Num2)
+            Substraction(Num1, Num2)
+            Division(Num1, Num2)
+
+        }
+
+        let multiply = function (Num1, Num2) {
+            console.log(Num1 * Num2)
+        }
+        let Addtion = function (Num1, Num2) {
+            console.log(Num1 + Num2)
+        }
+        let Substraction = function (Num1, Num2) {
+            console.log(Num1 - Num2)
+        }
+        let Division = function (Num1, Num2) {
+            console.log(Num1 / Num2)
+        }
+
+        var Num1 = Number(prompt("Enter Num1"))
+        var Num2 = Number(prompt("Enter Num2"))
+        calculator(Num1, Num2);
+
+
+        // // block scope
+        if (true) {
+            let age = 23;
+            console.log(age); // Output: 23 
+        }
+
+        console.log(age); // Output: ReferenceError
+    </script>
+</body>
+
+</html>
