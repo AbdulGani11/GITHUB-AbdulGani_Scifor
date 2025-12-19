@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // // 1. Create an object (The "Object Literal" way - Recommended)
+        // const user = {
+        //     name: "Alice",
+        //     age: 25,
+        //     isAdmin: false
+        // };
+
+        // // 2. Read (Access) properties
+        // // Recommended: Dot notation (.)
+        // console.log("Name:", user.name);
+
+        // // 3. Update (Modify) a property
+        // user.age = 26; // Alice had a birthday
+
+        // // Adding a NEW property simply by assigning it
+        // user.city = "New York";
+
+        // // 4. Delete a property
+        // delete user.isAdmin;
+
+        // // 5. Print the final object
+        // console.log("Final User:", user);
+
+
+
+        // console.log("\n")
+
+
+
+
+
+        // // student object
+        // let student = {
+        //     name: "priya",
+        //     age: 17,
+        //     course: "full stack dev"
+        // }
+
+        // // adding new property Batch.
+        // student.Batch = "2025"
+        // student.location = "pune"
+
+        // // delete
+        // delete student.location;
+        // delete student.course;
+
+        // console.log(student.name);
+        // console.log(student.age);
+        // console.log(student.course);
+        // console.log(student.Batch);
+
+
+
+
+
+        // I can do looping over an object like this:
+        // const user = {
+        //     name: "Alice",
+        //     age: 25,
+        //     city: "Paris"
+        // };
+
+        // for (const key in user) {
+        //     // 1. 'key' will be "name", then "age", then "city"
+        //     console.log("Label:", key);
+
+        //     // 2. To get the value, you MUST use Bracket Notation: user[key]
+        //     // (user.key would not work here!)
+        //     console.log("Value:", user[key]);
+
+        //     console.log("---");
+        // }
+
+
+        // Student Object
+
+        let student = {
+            name: "Priya",
+            age: 23,
+            course: "CSE",
+            isPlaced: "Yes"
+        }
+
+        // Print all values using:
+        // 1. dot notation
+        console.log(student.name);
+        console.log(student.age);
+        console.log(student.course);
+        console.log(student.isPlaced);
+
+        console.log('\n')
+
+        // 2. bracket notation.
+        console.log(student["name"]);
+        console.log(student["age"]);
+        console.log(student["course"]);
+        console.log(student["isPlaced"]);
+
+
+        console.log('\n')
+
+
+        // mobile object
+        let mobile = {
+            brand: "Samsung",
+            model: "Galaxy S21",
+            warranty: "1 year"
+        };
+
+        // new property
+        mobile.price = 50000;
+
+        // Update brand
+        mobile.brand = "Apple";
+
+        // Delete warranty
+        delete mobile.warranty;
+
+        console.log(mobile);
+
+    </script>
+</body>
+
+</html>
