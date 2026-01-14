@@ -1,0 +1,606 @@
+/* Smooth scrolling for anchor links */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Base font for entire app - Satoshi from Fontshare */
+body {
+    font-family: "Satoshi", sans-serif;
+}
+
+/* Display font utility for headings - Clash Display from Fontshare */
+.font-serif {
+    font-family: "Sentient", serif;
+}
+
+/* Brand accent color (green) */
+.text-accent {
+    color: #3e7d3e;
+}
+
+/* Hero white button style */
+.btn-hero {
+    background: #fff;
+    color: #1a1a1a;
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.btn-hero:hover {
+    background: #1a1a1a;
+    color: #fff;
+}
+
+/* Full viewport height sections */
+.full-height {
+    min-height: 100dvh;
+}
+
+/* Fixed background image on home page */
+.bg-image {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60%;
+    background: url("https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1920&q=80") center/cover no-repeat;
+    z-index: -1;
+    opacity: 0.9;
+}
+
+/* White gradient fade overlay on background image */
+.bg-image::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 50%;
+    background: linear-gradient(to bottom, #fff 0%, rgba(255, 255, 255, 0.9) 50%, transparent 100%);
+}
+
+/* Hero Section - padding for landing area */
+.hero-section {
+    padding-top: 2rem;
+    padding-bottom: 4rem;
+}
+
+/* Limits hero subtitle width for readability */
+.hero-subtitle {
+    max-width: 42rem;
+}
+
+#contact {
+    /* Use min-height so content can grow if it exceeds the viewport height */
+    min-height: 100dvh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Contact Form - transparent inputs */
+.contact-input {
+    background-color: transparent;
+}
+
+/* Transparent textarea with no resize */
+.contact-textarea {
+    background-color: transparent;
+    resize: none;
+}
+
+/* UI Polish: Remove default Bootstrap focus glow and add custom focus state */
+.contact-input:focus,
+.contact-textarea:focus {
+    background-color: rgba(0, 0, 0, 0.02);
+    /* Very light gray on focus */
+    box-shadow: none;
+    /* Removes Bootstrap's blue glow */
+    border-color: #000;
+    /* Makes the bottom border sharper black */
+}
+
+/* Responsive hero title - premium typography */
+.hero-heading {
+    font-size: clamp(2.5rem, 5vw + 1rem, 4.5rem);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+}
+
+/* Responsive section title - scales 1.5rem to 2.25rem */
+.section-title {
+    font-size: clamp(1.5rem, 3vw + 0.5rem, 2.25rem);
+}
+
+/* Menu bento grid - 2 columns on mobile */
+.bento-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 180px;
+    gap: 1.25rem;
+}
+
+/* Tablet: 3 columns */
+@media (width >=768px) {
+    .bento-grid {
+        grid-template-columns: repeat(3, 1fr);
+        grid-auto-rows: 220px;
+    }
+}
+
+/* Desktop: 4 columns with spanning cards */
+@media (width >=1024px) {
+    .bento-grid {
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(3, 240px);
+    }
+
+    .bento-card:nth-child(1) {
+        grid-column: span 2;
+        grid-row: span 2;
+    }
+
+    .bento-card:nth-child(4) {
+        grid-column: span 2;
+    }
+}
+
+/* Menu card container with hover animation */
+.bento-card {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid #dee2e6;
+    border-radius: 0.5rem;
+    transition: transform 0.3s ease;
+}
+
+/* Menu card image fills container */
+.bento-card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+/* Menu card scales up on hover */
+.bento-card:hover {
+    transform: scale(1.05);
+}
+
+/* Nav links scale and darken on hover */
+nav ul li a:hover {
+    transform: scale(1.05);
+    color: black;
+}
+
+/* Menu card text overlay with gradient */
+.bento-card-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1.5rem;
+    color: white;
+    background: linear-gradient(to top,
+            rgba(0, 0, 0, 0.7) 0%,
+            rgba(0, 0, 0, 0) 100%);
+}
+
+/* Menu card dish name */
+.bento-card-title {
+    font-size: 1.25rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    margin-bottom: 0.25rem;
+}
+
+/* Menu card price styling */
+.bento-card-price {
+    font-size: 1rem;
+    opacity: 0.75;
+    margin-bottom: 0;
+}
+
+/* Dark button fade transition */
+.btn-dark {
+    transition: opacity 0.3s ease;
+}
+
+/* Dark button slightly fades on hover */
+.btn-dark:hover {
+    opacity: 0.9;
+}
+
+/* Chef's selection table base */
+.special-table {
+    text-align: left;
+}
+
+/* Table cell padding for chef's selection */
+.special-table thead th,
+.special-table tbody td {
+    padding-top: 1.75rem;
+    padding-bottom: 1.75rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+/* Table header styling - uppercase labels */
+.special-table thead th {
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.875rem;
+    color: #6c757d;
+    border-bottom: 2px solid #dee2e6;
+    letter-spacing: 0.1em;
+}
+
+/* Section header centering and spacing */
+.section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+/* Bootstrap card override - rounded corners */
+.card {
+    border-radius: 1rem;
+}
+
+/* Form input dark focus ring */
+.form-control:focus {
+    border-color: #333;
+    box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.1);
+}
+
+/* Outline button hover - fills dark */
+.btn-outline-dark:hover {
+    background-color: #333;
+    border-color: #333;
+}
+
+/* Disabled button styling */
+.btn-dark:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
+/* All sections fade in on load */
+section {
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Fade in animation keyframes */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Loading spinner size */
+.spinner-border {
+    width: 2rem;
+    height: 2rem;
+}
+
+/* Badge font weight override */
+.badge {
+    font-weight: 500;
+}
+
+/* Link button fades on hover */
+a.btn-link:hover {
+    opacity: 0.8;
+}
+
+/* Mobile: smaller headings and spacing */
+@media (max-width: 768px) {
+    .section-header {
+        margin-bottom: 2rem;
+    }
+
+    .hero-heading {
+        font-size: 2rem;
+    }
+}
+
+/* FoodCard - main card container with hover lift */
+.food-card {
+    border-radius: 20px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    &:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+    }
+
+    &:hover .food-card-image {
+        transform: scale(1.05);
+    }
+}
+
+/* FoodCard image wrapper with fixed height */
+.food-card-image-container {
+    position: relative;
+    overflow: hidden;
+    height: 240px;
+}
+
+/* FoodCard image with zoom transition */
+.food-card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+/* FoodCard bottom gradient overlay */
+.food-card-gradient {
+    position: absolute;
+    inset: auto 0 0 0;
+    height: 60px;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.3));
+    pointer-events: none;
+}
+
+/* FoodCard category badge (top-left) */
+.food-card-badge {
+    position: absolute;
+    inset-block-start: 12px;
+    inset-inline-start: 12px;
+    padding: 6px 14px;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #fff;
+}
+
+/* FoodCard rating pill (bottom-right) */
+.food-card-rating {
+    position: absolute;
+    inset-block-end: 12px;
+    inset-inline-end: 12px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 10px;
+    border-radius: 50px;
+    background: rgba(255, 255, 255, 0.95);
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+
+/* FoodCard content area padding */
+.food-card-body {
+    padding: 1.25rem;
+}
+
+/* FoodCard dish name */
+.food-card-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-block-end: 0.4rem;
+}
+
+/* FoodCard meta info (time, calories) */
+.food-card-meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-block-end: 1rem;
+    font-size: 0.85rem;
+    color: #6c757d;
+}
+
+/* FoodCard description text */
+.food-card-subtitle {
+    font-size: 0.9rem;
+    color: #6c757d;
+    line-height: 1.5;
+    margin-block-end: 1rem;
+}
+
+/* FoodCard price pill (green) */
+.food-card-price {
+    display: inline-block;
+    padding: 5px 12px;
+    border-radius: 50px;
+    background: #e8f5e9;
+    color: #2e7d32;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+/* FoodCard button base with light/dark variants */
+.food-card-btn {
+    width: 100%;
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    text-decoration: none;
+    transition: background 0.2s ease, color 0.2s ease;
+    cursor: pointer;
+
+    &.food-card-btn-light {
+        background: #f5f5f5;
+        color: #1a1a1a;
+        border: 1px solid #eee;
+
+        &:hover {
+            background: #1a1a1a;
+            color: #fff;
+        }
+    }
+
+    &.food-card-btn-dark {
+        background: #1a1a1a;
+        color: #fff;
+        border: none;
+
+        &:hover {
+            background: #333;
+        }
+    }
+}
+
+/* Utility - pointer cursor for clickable elements */
+.cursor-pointer {
+    cursor: pointer;
+}
+
+/* Feedback page gradient background */
+.feedback-page {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+/* Feedback testimonial card with hover lift */
+.feedback-card {
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+
+    &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+    }
+}
+
+/* Feedback decorative quote icon */
+.feedback-quote {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 80px;
+    line-height: 1;
+    color: #000;
+    opacity: 0.1;
+}
+
+/* Feedback user avatar with border */
+.feedback-avatar {
+    object-fit: cover;
+    border: 3px solid #f8f9fa;
+}
+
+/* Cart quantity +/- buttons */
+.cart-qty-btn {
+    width: 32px;
+    height: 32px;
+    border: 1.5px solid #dee2e6;
+}
+
+/* Cart item thumbnail - small image for horizontal layout */
+.cart-item-thumb {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+/* Cart quantity display width */
+.cart-qty-display {
+    min-width: 30px;
+}
+
+/* Cart item price width */
+.cart-item-price {
+    min-width: 70px;
+    text-align: right;
+}
+
+/* Order summary sticky positioning on large screens */
+@media (min-width: 992px) {
+    .position-lg-sticky {
+        position: sticky;
+    }
+}
+
+/* Empty cart icon container */
+.empty-cart-icon {
+    width: 100px;
+    height: 100px;
+    background: #f8f9fa;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    i {
+        font-size: 40px;
+        color: #adb5bd;
+    }
+}
+
+/* About page subtitle max width */
+.about-subtitle {
+    max-width: 600px;
+}
+
+/* About main hero image */
+.about-main-image {
+    height: 320px;
+    object-fit: cover;
+}
+
+/* About small overlay image (bottom-right) */
+.about-overlay-image {
+    position: absolute;
+    bottom: -40px;
+    right: -40px;
+    width: 200px;
+    height: 200px;
+    border: 5px solid white;
+    border-radius: 1rem;
+    overflow: hidden;
+}
+
+/* About section label (Our Story) */
+.about-label {
+    letter-spacing: 2px;
+    color: #10b981;
+}
+
+/* About timeline green circle marker */
+.about-timeline-circle {
+    width: 40px;
+    height: 40px;
+    background: #10b981;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+/* Checkout success checkmark icon */
+.checkout-success-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 100px;
+    background: #198754;
+    border-radius: 50%;
+
+    i {
+        font-size: 50px;
+    }
+}
