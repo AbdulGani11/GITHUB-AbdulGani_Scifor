@@ -79,7 +79,7 @@ function Cart() {
   // This acts as the "else" block: we only reach here if the cart is NOT empty.
   // Uses two-column layout: Cart items (left) + Order Summary (right sticky).
   return (
-    <section className="py-4 py-md-5 bg-light min-vh-100">
+    <section className="py-4 py-md-5 bg-light">
       <div className="container">
         {/* Continue Shopping Link - Above cart */}
         <div className="mb-3">
@@ -92,7 +92,7 @@ function Cart() {
           </Link>
         </div>
 
-        <div className="row g-4">
+        <div className="row gy-3 gy-lg-4 gx-lg-4">
           {/* LEFT COLUMN - Cart Items                                        */}
           <div className="col-lg-8">
             <div className="card border-0 shadow-sm rounded-4">
@@ -134,27 +134,31 @@ function Cart() {
                 <div>
                   {cartItems.map((item, index) => (
                     <div key={item.id}>
-                      <div className="d-flex align-items-center gap-3 py-3">
-                        {/* Item Image - Small thumbnail */}
-                        <img
-                          src={item.image}
-                          alt={item.name}
-                          className="rounded-3 cart-item-thumb"
-                        />
+                      <div className="cart-item-row py-3">
+                        {/* LEFT: Image + Name (stacks vertically on mobile) */}
+                        <div className="cart-item-left">
+                          {/* Item Image - Small thumbnail */}
+                          <img
+                            src={item.image}
+                            alt={item.name}
+                            className="rounded-3 cart-item-thumb"
+                          />
 
-                        {/* Item Name and Category */}
-                        {/* {item.category && (...)} only renders if category exists */}
-                        <div className="flex-grow-1">
-                          <h6 className="font-serif fw-semibold mb-1">
-                            {item.name}
-                          </h6>
-                          {item.category && (
-                            <p className="text-secondary mb-0 small">
-                              {item.category}
-                            </p>
-                          )}
+                          {/* Item Name and Category */}
+                          {/* {item.category && (...)} only renders if category exists */}
+                          <div className="cart-item-info">
+                            <h6 className="font-serif fw-semibold mb-1">
+                              {item.name}
+                            </h6>
+                            {item.category && (
+                              <p className="text-secondary mb-0 small">
+                                {item.category}
+                              </p>
+                            )}
+                          </div>
                         </div>
 
+                        {/* RIGHT: Quantity, Price, Remove */}
                         {/* Quantity buttons: - and + */}
                         {/* updateQuantity(id, newQuantity) changes the quantity */}
                         <div className="d-flex align-items-center gap-2">
@@ -211,10 +215,7 @@ function Cart() {
 
           {/* RIGHT COLUMN - Order Summary (Sticky on desktop)  */}
           <div className="col-lg-4">
-            <div
-              className="card border-0 shadow-sm rounded-4 position-lg-sticky"
-              style={{ top: "100px" }}
-            >
+            <div className="card border-0 shadow-sm rounded-4 order-summary-card">
               <div className="card-body p-4">
                 <h5 className="font-serif fw-semibold mb-4">Order Summary</h5>
 

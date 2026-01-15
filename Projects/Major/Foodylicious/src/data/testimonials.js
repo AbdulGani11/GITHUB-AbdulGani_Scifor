@@ -1,6 +1,5 @@
-// FeedbackPage data: testimonials (customer reviews) and stats (top metrics)
+// FeedbackPage static data file containing testimonials (customer reviews) and stats (top metrics), with no logic—only arrays of objects—used by FeedbackPage.jsx.
 
-// This is a static data file - no logic, just arrays of object. Used by: FeedbackPage.jsx
 
 // Array of customer review objects (each object = one review card)
 export const testimonials = [
@@ -9,7 +8,7 @@ export const testimonials = [
     name: 'Emily Johnson',
     avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&q=80',
     rating: 5,
-    comment: 'Absolutely love Foodylicious! The food always arrives hot and fresh. The variety of restaurants is amazing, and the delivery is super fast.',
+    comment: 'Absolutely love Foodylicious! The food always arrives hot and fresh. The variety of restaurants is amazing, and the delivery is super fast. I’ve tried so many different cuisines through this app, and every order has been smooth and reliable. The app makes it really easy to find great food, and the overall experience has been consistently excellent.',
     date: 'December 2024',
     role: 'Food Enthusiast',
   },
@@ -52,6 +51,7 @@ export const testimonials = [
 ];
 
 // Stats displayed at top of FeedbackPage (3 metrics in a row)
+// NOTE: Only the “Average Rating” needs stars; the other stats are just numbers, so `showStars` is not required for them.
 export const stats = [
   { value: '4.9', label: 'Average Rating', showStars: true },
   { value: '10K+', label: 'Happy Customers' },

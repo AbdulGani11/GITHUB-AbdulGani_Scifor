@@ -60,6 +60,19 @@ body {
     background: linear-gradient(to bottom, #fff 0%, rgba(255, 255, 255, 0.9) 50%, transparent 100%);
 }
 
+/*
+background: linear-gradient(direction, color-stop1, color-stop2, ...);
+It means:
+
+- to bottom → gradient direction (top → bottom)
+
+- #fff 0% → solid white at the top
+
+- rgba(255, 255, 255, 0.9) 50% → slightly transparent white in the middle
+
+- transparent 100% → fully transparent at the bottom
+*/
+
 /* Hero Section - padding for landing area */
 .hero-section {
     padding-top: 2rem;
@@ -95,8 +108,10 @@ body {
 .contact-textarea:focus {
     background-color: rgba(0, 0, 0, 0.02);
     /* Very light gray on focus */
+
     box-shadow: none;
     /* Removes Bootstrap's blue glow */
+
     border-color: #000;
     /* Makes the bottom border sharper black */
 }
@@ -254,6 +269,9 @@ nav ul li a:hover {
     box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.1);
 }
 
+/* Syntax: box-shadow: offset-x (left / right: +ve = right, -ve = left) offset-y (up / down: +ve = down, -ve = up) blur-radius color;
+ */
+
 /* Outline button hover - fills dark */
 .btn-outline-dark:hover {
     background-color: #333;
@@ -323,6 +341,10 @@ a.btn-link:hover {
         transform: translateY(-8px);
         box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
     }
+
+    /* transform: translateY(-8px): Moves card UP by 4 pixels.
+        - Negative value = upward movement
+        - Creates "lifting off page" effect */
 
     &:hover .food-card-image {
         transform: scale(1.05);
@@ -526,10 +548,61 @@ a.btn-link:hover {
     text-align: right;
 }
 
-/* Order summary sticky positioning on large screens */
+/* Cart item row - horizontal on desktop, wraps on mobile */
+.cart-item-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+/* Image + Name group - horizontal on desktop, vertical on mobile */
+.cart-item-left {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex: 1;
+    min-width: 0;
+}
+
+/* Mobile cart adjustments */
+@media (max-width: 576px) {
+
+    /* Stack image and name vertically on mobile */
+    .cart-item-left {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    .cart-item-thumb {
+        width: 70px;
+        height: 70px;
+    }
+
+    .cart-qty-btn {
+        width: 28px;
+        height: 28px;
+    }
+
+    .cart-qty-display {
+        min-width: 24px;
+    }
+
+    .cart-item-price {
+        min-width: auto;
+        font-size: 0.9rem;
+    }
+
+    .cart-item-info {
+        min-width: 0;
+    }
+}
+
+/* Order Summary card - sticky on desktop (992px+), normal flow on mobile */
 @media (min-width: 992px) {
-    .position-lg-sticky {
+    .order-summary-card {
         position: sticky;
+        top: 20px;
     }
 }
 
@@ -556,7 +629,7 @@ a.btn-link:hover {
 
 /* About main hero image */
 .about-main-image {
-    height: 320px;
+    height: 425px;
     object-fit: cover;
 }
 
@@ -564,9 +637,9 @@ a.btn-link:hover {
 .about-overlay-image {
     position: absolute;
     bottom: -40px;
-    right: -40px;
-    width: 200px;
-    height: 200px;
+    right: -30px;
+    width: 230px;
+    height: 230px;
     border: 5px solid white;
     border-radius: 1rem;
     overflow: hidden;

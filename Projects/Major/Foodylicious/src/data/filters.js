@@ -1,5 +1,4 @@
-// Filter options for Restaurants page
-// Used by: Restaurants.jsx
+// Filter options for the Restaurants page used by Restaurants.jsx
 
 // Badge filter options (restaurant tags)
 export const badgeFilters = [

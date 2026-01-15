@@ -1,17 +1,9 @@
-// ============================================================================
-// FeedbackPage.jsx - Customer testimonials and ratings page
-// Route: /feedback
-// Purpose: Displays customer reviews, ratings, and company statistics
-// Data Source: testimonials.js (static data, no API call)
-// ============================================================================
+// FeedbackPage.jsx is the customer testimonials and ratings page at the /feedback route that displays reviews, ratings, and company statistics using static data from testimonials.js with no API calls.
 
 import BackButton from "../components/ui/BackButton";
 import { testimonials, stats } from "../data/testimonials";
 
-// ----------------------------------------------------------------------------
-// HELPER COMPONENT: StarRating
-// Shows 5 stars based on rating number (e.g., rating=3 → ★★★☆☆)
-// ----------------------------------------------------------------------------
+// StarRating component: Shows 5 stars based on rating number (e.g., rating=3 → ★★★☆☆)
 function StarRating({ rating }) {
   // Create array [1, 2, 3, 4, 5] to loop through
   const stars = [1, 2, 3, 4, 5];
@@ -34,11 +26,7 @@ function StarRating({ rating }) {
   );
 }
 
-// ----------------------------------------------------------------------------
-// FEEDBACKPAGE COMPONENT
-// Static page - displays data from testimonials.js file
-// Uses map() to loop through stats and testimonials arrays
-// ----------------------------------------------------------------------------
+// FeedbackPage component which is a static page that uses map() to render data from the stats and testimonials arrays.
 function FeedbackPage() {
   return (
     <section className="py-5 min-vh-100 feedback-page">
@@ -46,9 +34,7 @@ function FeedbackPage() {
         {/* BackButton: Reusable component for navigation */}
         <BackButton to="/" label="Back to Home" />
 
-        {/* ------------------------------------------------------------------ */}
-        {/* PAGE HEADER - Title and subtitle                                   */}
-        {/* ------------------------------------------------------------------ */}
+        {/* PAGE HEADER - Title and subtitle */}
         <div className="text-center mb-5">
           <span className="badge bg-dark rounded-pill px-4 py-2 mb-3 fs-6">
             <i className="ri-double-quotes-l me-2"></i>Testimonials
@@ -64,11 +50,9 @@ function FeedbackPage() {
           </p>
         </div>
 
-        {/* ------------------------------------------------------------------ */}
         {/* STATS SECTION - Company statistics in 3 columns                    */}
-        {/* row-cols-1: 1 column on mobile (stacked)                           */}
-        {/* row-cols-md-3: 3 columns on tablets and up (12÷3=4 each = 33.33%)  */}
-        {/* ------------------------------------------------------------------ */}
+        {/* row-cols-1:     1 column on mobile (stacked)                       */}
+        {/* row-cols-md-3:  3 columns on tablets and up (12÷3=4 each = 33.33%) */}
         <div className="row row-cols-1 row-cols-md-3 g-4 mb-5">
           {stats.map((stat, index) => (
             <div className="col" key={index}>
@@ -81,9 +65,11 @@ function FeedbackPage() {
                 {/* Show 5 stars if stat.showStars is true */}
                 {stat.showStars && (
                   <div className="mb-2">
-                    {[1, 2, 3, 4, 5].map((i) => (
-                      <i key={i} className="ri-star-fill text-warning fs-5"></i>
-                    ))}
+                    <i className="ri-star-fill text-warning fs-5"></i>
+                    <i className="ri-star-fill text-warning fs-5"></i>
+                    <i className="ri-star-fill text-warning fs-5"></i>
+                    <i className="ri-star-fill text-warning fs-5"></i>
+                    <i className="ri-star-fill text-warning fs-5"></i>
                   </div>
                 )}
 
@@ -94,19 +80,15 @@ function FeedbackPage() {
           ))}
         </div>
 
-        {/* ------------------------------------------------------------------ */}
-        {/* TESTIMONIALS GRID - Customer review cards                          */}
-        {/* First card is bigger (col-lg-8), others are smaller (col-lg-4)     */}
-        {/* ------------------------------------------------------------------ */}
+        {/* TESTIMONIALS GRID - Customer review cards */}
+        {/* First card is wider (col-lg-8), others are normal (col-lg-4) */}
         <div className="row g-4">
           {testimonials.map((testimonial, index) => {
-            // Check if this is the first (featured) card
+            // Check if this is the first (featured) card: `index === 0` is needed because `map()` treats every item the same, so this check tells React which one is the first card to style differently
             const isFirstCard = index === 0;
 
-            // First card gets bigger column and larger text/avatar
+            // Only column size changes, content stays the same
             const columnClass = isFirstCard ? "col-lg-8" : "col-lg-4";
-            const textClass = isFirstCard ? "fs-5" : "";
-            const avatarSize = isFirstCard ? "64px" : "50px";
 
             return (
               <div className={`col-md-6 ${columnClass}`} key={testimonial.id}>
@@ -123,10 +105,7 @@ function FeedbackPage() {
                     </div>
 
                     {/* Customer's review comment */}
-                    <p
-                      className={`text-dark mb-4 ${textClass}`}
-                      style={{ lineHeight: 1.7 }}
-                    >
+                    <p className="text-dark mb-4" style={{ lineHeight: 1.7 }}>
                       "{testimonial.comment}"
                     </p>
 
@@ -136,14 +115,17 @@ function FeedbackPage() {
                         src={testimonial.avatar}
                         alt={testimonial.name}
                         className="rounded-circle feedback-avatar"
-                        style={{ width: avatarSize, height: avatarSize }}
+                        style={{ width: "50px", height: "50px" }}
                       />
+
                       <div className="ms-3">
                         <h6 className="fw-bold mb-0">{testimonial.name}</h6>
+
                         <small className="text-secondary">
                           {testimonial.role}
                         </small>
                       </div>
+
                       <small className="text-secondary ms-auto">
                         {testimonial.date}
                       </small>

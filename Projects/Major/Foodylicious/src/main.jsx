@@ -1,6 +1,6 @@
 // main.jsx - Application Entry Point
 
-// Import React
+// Import React:
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 

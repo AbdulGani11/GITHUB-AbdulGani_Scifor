@@ -1,14 +1,14 @@
-// AboutUs.jsx - Company information and story page
-// Route: /about
-// Purpose: Displays company history, mission, and timeline milestones
+// AboutUs.jsx — Company information and story page at the /about route that displays the company’s history, mission, and timeline milestones
 
 import { Link } from "react-router";
 import BackButton from "../components/ui/BackButton";
 
 // STATIC DATA:
-// 1. This array holds the company timeline milestones.
+// 1. This "TIMELINE" array holds the company timeline milestones.
+//
 // 2. Each object has: year (short), title (heading), desc (description)
-// 3. We define data outside the component so it doesn't recreate on every render.
+//
+// 3. I define "TIMELINE" array of objects outside the component so it doesn't recreate on every render.
 const TIMELINE = [
   {
     year: "20",
@@ -27,9 +27,7 @@ const TIMELINE = [
   },
 ];
 
-// AboutUS COMPONENT:
-// 1. This is a static page (no state, no API calls).
-// 2. It simply displays company information using JSX.
+// this AboutUs component is a static page with no state or API calls that simply renders the company information.
 function AboutUs() {
   return (
     <div className="about-page">
@@ -44,6 +42,7 @@ function AboutUs() {
             <h1 className="font-serif fw-bold mb-3 fs-2">
               About <span className="text-accent">Foodylicious</span>
             </h1>
+
             <p className="text-secondary fs-5 mx-auto mb-4 about-subtitle">
               Where passion meets flavor. Delivering exceptional culinary
               experiences since 2020.
@@ -60,12 +59,16 @@ function AboutUs() {
         </div>
       </section>
 
-      {/* ------------------------------------------------------------------ */}
-      {/* OUR STORY SECTION - Two-column layout with images and text         */}
-      {/* Bootstrap grid: row-cols-1 = 1 column on mobile (stacked)          */}
-      {/*                 row-cols-lg-2 = 2 columns on large screens (≥992px)*/}
-      {/* Formula: 12 ÷ 2 = 6, so each .col takes 50% width on desktop       */}
-      {/* ------------------------------------------------------------------ */}
+      {/* OUR STORY SECTION - Two-column layout with images and text. */}
+      {/* Bootstrap grid:
+          row-cols-1     → 1 column on mobile (stacked)
+          row-cols-lg-2  → 2 columns on large screens (≥992px)
+
+          Formula:
+          Mobile:  12 ÷ 1 = 12  (12/12) → each column is 100% width
+          Desktop: 12 ÷ 2 = 6   (6/12)  → each column is 50% width
+      */}
+
       <section id="story" className="py-5 bg-light">
         <div className="container py-4">
           <div className="row row-cols-1 row-cols-lg-2 align-items-center g-5">
@@ -79,6 +82,7 @@ function AboutUs() {
                   alt="Restaurant"
                   className="w-100 rounded-4 about-main-image"
                 />
+
                 {/* Overlay image container — positioned on top of the main image using custom CSS; the image inside fills it using Bootstrap */}
                 <div className="about-overlay-image">
                   <img
@@ -97,15 +101,19 @@ function AboutUs() {
                   Our Story
                 </span>
               </h2>
+
               <h3 className="font-serif fw-bold mt-2 mb-4 fs-3">
                 From Passion to Your Plate
               </h3>
+
               <p className="text-secondary mb-2 lh-base">
                 Founded in 2020, Foodylicious began with a simple vision: to
                 bridge the gap between exceptional restaurants and food lovers
                 everywhere.
               </p>
+
               <hr />
+
               <p className="text-secondary mb-4 lh-base">
                 What started as a small team with big dreams has grown into a
                 platform trusted by thousands. We've partnered with the finest
@@ -114,19 +122,18 @@ function AboutUs() {
               </p>
 
               {/* TIMELINE: Displays company milestones: */}
-              {/* 1. map() loops through TIMELINE array and renders each milestone  */}
-              {/* 2. key={index} helps React track each item for efficient updates  */}
+              {/* 1. map() loops through TIMELINE array and renders each milestone.  */}
+              {/* 2. key={index} helps React track each item for efficient updates.  */}
               <div className="d-flex flex-column gap-3 mt-4">
                 {TIMELINE.map((item, index) => (
                   <div key={index} className="d-flex align-items-center gap-3">
-                    
                     {/* Circle with year number */}
                     <div className="about-timeline-circle">
                       <span className="fw-bold text-white small">
                         {item.year}
                       </span>
                     </div>
-                    
+
                     {/* Milestone title and description */}
                     <div>
                       <h6 className="fw-bold mb-0">{item.title}</h6>

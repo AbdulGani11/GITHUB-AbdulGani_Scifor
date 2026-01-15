@@ -2,7 +2,7 @@ import { useState } from "react";
 import SectionHeader from "./ui/SectionHeader";
 
 function Contact() {
-  // State to manage form data
+  // formData State to manage form data.
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -10,19 +10,19 @@ function Contact() {
     message: "",
   });
 
-  // Handle input changes
+  // Handle input changes:
   const handleChange = (event) => {
-    // 1. Create a simplified copy of the current data
+    // 1. Created a simplified copy of the current data
     const newData = { ...formData };
 
-    // 2. Update the specific field (like "email") in that copy
+    // 2. Update the specific field (like "email" etc.) in that copy
     newData[event.target.name] = event.target.value;
 
     // 3. Save the new data to state
     setFormData(newData);
   };
 
-  // Handle form submission
+  // Handle form submission:
   const handleSubmit = (event) => {
     // Stop the page from refreshing automatically
     event.preventDefault();
@@ -37,10 +37,6 @@ function Contact() {
       subject: "",
       message: "",
     });
-
-    // You are writing this extra code to get two "superpowers" that HTML doesn't give you automatically:
-    // 1. No Refresh: You stay on the same page (smooth experience).
-    // 2. Auto-Clear: You can wipe the form clean instantly after sending.
   };
 
   return (

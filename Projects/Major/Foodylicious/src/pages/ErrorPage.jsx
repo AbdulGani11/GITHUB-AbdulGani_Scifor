@@ -10,7 +10,7 @@
 import { useRouteError, isRouteErrorResponse, Link } from "react-router";
 
 // ----------------------------------------------------------------------------
-// ERROR PAGE COMPONENT
+// ErrorPage COMPONENT:
 // This component renders when:
 //   1. User navigates to a non-existent route (404 - Page Not Found)
 //   2. A component crashes (JavaScript error)

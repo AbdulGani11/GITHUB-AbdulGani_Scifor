@@ -21,7 +21,7 @@ function Footer() {
             {/* Social Icons */}
             <div className="d-flex gap-3">
               <a href="#" className="text-white-50 fs-5 text-decoration-none">
-                <i class="ri-instagram-fill"></i>
+                <i className="ri-instagram-fill"></i>
               </a>
               <a href="#" className="text-white-50 fs-5 text-decoration-none">
                 <i className="ri-twitter-x-fill"></i>
