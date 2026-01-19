@@ -1,4 +1,4 @@
-// Checkout.jsx - Order completion page at "Route: /checkout" that uses CartContext (items) and local state (form) to collect customer details and place the final order.
+// Checkout.jsx COMPONENT - Order completion page at "Route: /checkout" that uses CartContext (items) and local state (form) to collect customer details with validation before placing the final order.
 
 import { useState } from "react";
 import { Link, useNavigate } from "react-router";
@@ -7,7 +7,6 @@ import toast from "react-hot-toast";
 import validator from "validator";
 import SectionHeader from "../components/ui/SectionHeader";
 
-// Checkout.jsx COMPONENT: Handles the final step of the ordering process by using "local form state management" and "validation" before submitting the order.
 function Checkout() {
   // NAVIGATION HOOK: Uses useNavigate() to automatically switch pages via code (e.g., navigate('/')) after specific actions—for example, taking the user to the home page after a successful order.
   const navigate = useNavigate();
@@ -15,17 +14,17 @@ function Checkout() {
   // CART CONTEXT: Uses the useCart() hook to access CartContext, destructuring { } only the essential data and functions (cartItems, getCartTotal, clearCart) needed to process the checkout.
   const { cartItems, getCartTotal, clearCart } = useCart();
 
-  // --------------------------------------------------------------------------
-  // FORM STATE MANAGEMENT:
-  // useState with an object stores all form fields in one place. This is called a "controlled form" - React controls the input values.
-
-  // formData:        Stores user input for all fields
-  // errors:          Stores validation error messages for each field
-  // paymentMethod:   Which payment option is selected ('cod' = Cash on Delivery, 'card' = Card Payment)
-  // isSubmitting:    True while order is being processed (shows loading)
-  // showSuccess:     True after order is placed (shows success message)
-  // finalTotal:      Stores the total at submission time for success screen
-  // --------------------------------------------------------------------------
+  /**
+   * FORM STATE MANAGEMENT:
+   * useState with an object stores all form fields in one place. This is called a "controlled form" - React controls the input values.
+   *
+   * @property {Object} formData - Stores user input for all fields
+   * @property {Object} errors - Stores validation error messages for each field
+   * @property {string} paymentMethod - Which payment option is selected ('cod' = Cash on Delivery, 'card' = Card Payment)
+   * @property {boolean} isSubmitting - True while order is being processed (shows loading)
+   * @property {boolean} showSuccess - True after order is placed (shows success message)
+   * @property {number} finalTotal - Stores the total at submission time for success screen
+   */
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -39,47 +38,51 @@ function Checkout() {
   const [showSuccess, setShowSuccess] = useState(false);
   const [finalTotal, setFinalTotal] = useState(0);
 
-  // --------------------------------------------------------------------------
-  // CALCULATE ORDER TOTALS
-  // Same calculation as Cart.jsx for consistency.
-  // --------------------------------------------------------------------------
+  // CALCULATE ORDER TOTALS: Uses the same calculation logic as Cart.jsx to ensure consistency.
   const subtotal = getCartTotal();
   const tax = subtotal * 0.05;
   const deliveryFee = 3.0;
   const total = subtotal + tax + deliveryFee;
 
-  // --------------------------------------------------------------------------
-  // HANDLE INPUT CHANGES
-  // This function runs every time user types in any input field.
-
-  // event.target gives us the input element that triggered the event, { fieldName, fieldValue } destructures the element's name and current value.
-  // Example: <input name="email" value="john@..." /> → fieldName="email", fieldValue="john@..."
-
-  // setFormData: Copy all previous values (...prevFormData), then overwrite only the field that changed ([fieldName]: fieldValue).
-
-  // We also clear the error for this field when user starts typing again.
-  // --------------------------------------------------------------------------
+  /**
+   * HANDLE INPUT CHANGES:
+   * This function runs every time user types in any input field.
+   *
+   * @param {Event} event - The input change event
+   *
+   * @description
+   * event.target gives us the input element that triggered the event.
+   * I destructure { name, value } from the element to get fieldName and fieldValue.
+   *
+   * setFormData: Copy all previous values (...prevFormData),
+   * then overwrite only the field that changed ([fieldName]: fieldValue).
+   *
+   * I also clear the error for this field when user starts typing again.
+   */
   const handleInputChange = (event) => {
     const { name: fieldName, value: fieldValue } = event.target;
     setFormData((prevFormData) => ({
       ...prevFormData,
       [fieldName]: fieldValue,
     }));
-    // Clear error when user starts typing
     if (errors[fieldName]) {
       setErrors((prevErrors) => ({ ...prevErrors, [fieldName]: "" }));
     }
   };
 
-  // --------------------------------------------------------------------------
-  // FORM VALIDATION
-  // Checks all fields and returns true if valid, false if errors found.
-  //
-  // .trim() removes whitespace from start/end of string.
-  //  Uses validator.js library for phone and email validation:
-  //   - validator.isMobilePhone(phone, "en-IN") = checks valid Indian phone number
-  //   - validator.isEmail(email) = checks valid email format
-  // --------------------------------------------------------------------------
+  /**
+   * FORM VALIDATION:
+   * Checks all fields and returns true if valid, false if errors found.
+   *
+   * @returns {boolean} - true if form is valid, false if errors are found
+   *
+   * @description
+   * .trim() removes whitespace from start/end of string.
+   *
+   * Uses validator.js library for phone and email validation:
+   * - validator.isMobilePhone(phone, "en-IN") checks valid Indian phone number
+   * - validator.isEmail(email) checks valid email format
+   */
   const validateForm = () => {
     // Empty object to collect error messages - each field with an error gets added as a property (e.g., { name: "Name is required", phone: "..." })
     const newErrors = {};
@@ -121,7 +124,6 @@ function Checkout() {
   };
 
   // HANDLE ORDER SUBMISSION:
-  // async function because it needs to wait for the "API call".
   const handlePlaceOrder = async (e) => {
     e.preventDefault(); // e.preventDefault() stops the form from refreshing the page (default behavior).
 
@@ -150,11 +152,9 @@ function Checkout() {
     }, 3000);
   };
 
-  // --------------------------------------------------------------------------
   // EMPTY CART STATE - Early return pattern
   // Shows message if user comes to checkout with empty cart.
   // !showSuccess ensures we don't show this after successful order (when cart is cleared).
-  // --------------------------------------------------------------------------
   if (cartItems.length === 0 && !showSuccess) {
     return (
       <section className="py-5 bg-light min-vh-100">
@@ -174,11 +174,9 @@ function Checkout() {
     );
   }
 
-  // --------------------------------------------------------------------------
-  // ORDER SUCCESS STATE
+  // ORDER SUCCESS STATE:
   // Shown after order is successfully placed.
   // Displays thank you message and order total, then redirects to home.
-  // --------------------------------------------------------------------------
   if (showSuccess) {
     return (
       <section className="py-5 bg-light min-vh-100">
@@ -190,20 +188,25 @@ function Checkout() {
                 <i className="ri-check-line text-white"></i>
               </div>
             </div>
+
             <h2 className="font-serif mb-3 text-success">
               Order Placed Successfully!
             </h2>
+
             <p className="text-secondary mb-2">
               Thank you for your order, <strong>{formData.name}</strong>!
             </p>
+
             <p className="text-secondary mb-4">
               Your delicious food is being prepared and will be delivered to you
               soon.
             </p>
+
             {/* Order total card */}
             <div className="card d-inline-block shadow-sm border-0 mb-4">
               <div className="card-body px-5 py-3">
                 <p className="mb-1 text-secondary small">Order Total</p>
+
                 <h3 className="mb-0 font-serif">${finalTotal.toFixed(2)}</h3>
               </div>
             </div>
@@ -218,10 +221,10 @@ function Checkout() {
   }
 
   // --------------------------------------------------------------------------
-  // MAIN CHECKOUT FORM
+  // MAIN CHECKOUT FORM:
   // Two-column layout: Left (col-lg-7) for form, Right (col-lg-5) for summary.
   // Cannot use row-cols pattern here because columns have different widths.
-  // The form uses onSubmit to handle the submit button click.
+  // The form uses 'onSubmit' to handle the submit button click.
   // --------------------------------------------------------------------------
   return (
     <section className="py-5 bg-light min-vh-100">

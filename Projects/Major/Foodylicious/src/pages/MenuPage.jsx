@@ -1,9 +1,9 @@
-// ============================================================================
-// MenuPage.jsx - Restaurant menu items page
-// Route: /menu/:id (e.g., /menu/Seafood, /menu/Chicken)
-// Purpose: Shows all food items for a specific restaurant category
-// Data Source: Loader in router.jsx (fetches BEFORE component renders)
-// ============================================================================
+/**
+ * MenuPage.jsx - Restaurant menu items page
+ * Route: /menu/:id (e.g., /menu/Seafood, /menu/Chicken)
+ * Purpose: Shows all food items for a specific restaurant category
+ * Data Source: Loader in router.jsx (fetches BEFORE component renders)
+ */
 
 import { useLoaderData } from "react-router";
 import { useCart } from "../context/CartContext";
@@ -11,32 +11,31 @@ import SectionHeader from "../components/ui/SectionHeader";
 import BackButton from "../components/ui/BackButton";
 import FoodCard from "../components/ui/FoodCard";
 
-// ----------------------------------------------------------------------------
 // MenuPage COMPONENT:
 // This component receives pre-fetched data from the loader in router.jsx.
 // The loader extracts URL params and fetches both "menu" AND "item details".
 // No useEffect needed - data is guaranteed to be available when this renders.
-// ----------------------------------------------------------------------------
 function MenuPage() {
-  // --------------------------------------------------------------------------
-  // DATA FROM LOADER:
-  // useLoaderData() returns what the loader function returned in router.jsx.
-  // The loader returns: { menu, itemDetails }
-  //
-  // menu: { restaurantName: "...", items: [...] }
-  // itemDetails: { "123": {description: "..."}, "456": {description: "..."} }
-  //
-  // Both are fetched in "parallel" by the loader before this component renders.
-  // --------------------------------------------------------------------------
+  /**
+   * --------------------------------------------------------------------------
+   * DATA FROM LOADER:
+   * useLoaderData() returns what the loader function returned in router.jsx.
+   * The loader returns: { menu, itemDetails }
+   *
+   * menu: { restaurantName: "...", items: [...] }
+   * itemDetails: { "123": {description: "..."}, "456": {description: "..."} }
+   *
+   * Both are fetched in "parallel" by the loader before this component renders.
+   * --------------------------------------------------------------------------
+   */
+
   const { menu, itemDetails } = useLoaderData();
 
   // Get addToCart function from CartContext (shared cart state)
   const { addToCart } = useCart();
 
-  // --------------------------------------------------------------------------
   // MAIN RENDER - Show menu items.
   // Data is already loaded by the router, so no loading or null checks are needed.
-  // --------------------------------------------------------------------------
   return (
     <section className="py-5 bg-light min-vh-100">
       <div className="container">

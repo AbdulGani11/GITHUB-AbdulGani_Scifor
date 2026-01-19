@@ -1,12 +1,13 @@
 // Header: Main navigation bar with logo, menu links, and cart button
-// Parent component: <App /> - appears on every page
 
-import { Link } from 'react-router';
-import { useCart } from '../context/CartContext';
+// Link = basic navigation (no active styling)
+// NavLink = navigation with isActive prop for highlighting current page
+import { Link, NavLink } from "react-router";
+import { useCart } from "../context/CartContext";
 
 function Header() {
-  // useCart() = custom hook that gives us access to cart data
-  // getCartCount() returns total number of items in cart
+  // useCart() = custom hook that gives us access to cart data.
+  // getCartCount() = returns total number of items in cart.
   const { getCartCount } = useCart();
   const cartCount = getCartCount();
 
@@ -14,7 +15,10 @@ function Header() {
     <nav className="navbar navbar-expand-lg px-4 px-md-5 py-3 py-md-4 bg-transparent">
       <div className="container-fluid">
         {/* Brand Logo */}
-        <Link to="/" className="navbar-brand fs-4 fw-medium text-dark font-serif">
+        <Link
+          to="/"
+          className="navbar-brand fs-4 fw-medium text-dark font-serif"
+        >
           Foodylicious
         </Link>
 
@@ -32,35 +36,61 @@ function Header() {
         <div className="collapse navbar-collapse" id="navbarNav">
           {/* Nav Links */}
           <ul className="navbar-nav mx-auto gap-md-4 pt-3 pt-md-0">
-            
             <li className="nav-item py-2 py-md-0">
-              <Link to="/" className="nav-link">Home</Link>
+              {/* NavLink: className receives { isActive } to conditionally apply 'active' class */}
+              <NavLink
+                to="/"
+                end
+                className={({ isActive }) => `nav-link ${isActive ? "active" : ""}`}
+              >
+                Home
+              </NavLink>
             </li>
-            
+
             <li className="nav-item py-2 py-md-0">
-              <Link to="/restaurants" className="nav-link">Restaurants</Link>
+              <NavLink
+                to="/restaurants"
+                className={({ isActive }) => `nav-link ${isActive ? "active" : ""}`}
+              >
+                Restaurants
+              </NavLink>
             </li>
-            
+
             <li className="nav-item py-2 py-md-0">
-              <a href="/#menu" className="nav-link">Explore Dishes</a>
+              <a href="/#menu" className="nav-link">
+                Explore Dishes
+              </a>
             </li>
-            
+
             <li className="nav-item py-2 py-md-0">
-              <a href="/#chefs-selection" className="nav-link">Chef's Selection</a>
+              <a href="/#chefs-selection" className="nav-link">
+                Chef's Selection
+              </a>
             </li>
-            
+
             <li className="nav-item py-2 py-md-0">
-              <Link to="/feedback" className="nav-link">Customer Feedback</Link>
+              <NavLink
+                to="/feedback"
+                className={({ isActive }) => `nav-link ${isActive ? "active" : ""}`}
+              >
+                Customer Feedback
+              </NavLink>
             </li>
-            
+
             <li className="nav-item py-2 py-md-0">
-              <Link to="/about" className="nav-link">About Us</Link>
+              <NavLink
+                to="/about"
+                className={({ isActive }) => `nav-link ${isActive ? "active" : ""}`}
+              >
+                About Us
+              </NavLink>
             </li>
-            
+
             <li className="nav-item py-2 py-md-0">
-              <a href="/#contact" className="nav-link">Contact</a>
+              <a href="/#contact" className="nav-link">
+                Contact
+              </a>
             </li>
-         
           </ul>
 
           {/* CTA Buttons */}
@@ -75,9 +105,9 @@ function Header() {
               {cartCount > 0 && (
                 <span
                   className="position-absolute badge rounded-pill bg-danger"
-                  style={{ top: '-8px', right: '-8px', fontSize: '0.7rem' }}
+                  style={{ top: "-8px", right: "-8px", fontSize: "0.7rem" }}
                 >
-                  {cartCount > 99 ? '99+' : cartCount}
+                  {cartCount > 99 ? "99+" : cartCount}
                 </span>
               )}
             </Link>

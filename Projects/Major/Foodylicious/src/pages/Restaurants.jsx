@@ -11,86 +11,83 @@ import { badgeFilters, categoryFilters } from "../data/filters";
 import SectionHeader from "../components/ui/SectionHeader";
 import FoodCard from "../components/ui/FoodCard";
 
-// ----------------------------------------------------------------------------
-// RESTAURANTS COMPONENT
-// This component receives pre-fetched data from the loader.
-// No useEffect needed - data is guaranteed to be available when this renders.
-// ----------------------------------------------------------------------------
+// RESTAURANTS COMPONENT: This component receives pre-fetched data from the loader, so no useEffect is needed because data is guaranteed at render time
 function Restaurants() {
-
   // --------------------------------------------------------------------------
-  // DATA FROM LOADER
-  // useLoaderData() returns what the loader function returned in router.jsx.
-  // The data is GUARANTEED to be here because:
-  //   1. User clicks link to /restaurants
-  //   2. Router runs the loader function FIRST
-  //   3. Loader fetches data and returns it
-  //   4. THEN this component renders with data ready
+  // DATA FROM LOADER:
+  // useLoaderData() gets restaurant data returned by the loader in router.jsx.
   //
-  // No loading state needed - component only renders when data is ready!
-  // No error handling needed - errorElement in router catches errors!
+  // Flow:
+  // 1. User navigates to the /restaurants route.
+  // 2. React Router runs the loader first and fetches the data.
+  // 3. The component renders only after the data is ready.
+  //
+  // Result:
+  // - Data is guaranteed to be available here, so no loading state is needed.
+  // - Errors are handled by the router's errorElement.
   // --------------------------------------------------------------------------
   const restaurants = useLoaderData();
 
   // --------------------------------------------------------------------------
-  // FILTER STATE VARIABLES
-  // These remain unchanged - they control UI interactions, not data fetching.
-  // --------------------------------------------------------------------------
-  const [searchTerm, setSearchTerm] = useState("");        // User's search input
-  const [showFilters, setShowFilters] = useState(false);   // Toggle filter panel visibility
-  const [selectedBadges, setSelectedBadges] = useState([]); // Selected badge filters (array)
-  const [selectedCategories, setSelectedCategories] = useState([]); // Selected category filters
+  // FILTER STATE VARIABLES:
+  // These states are used only for UI interactions, not for data fetching.
+  // They control search input, filter visibility, and selected filters.
+  const [searchTerm, setSearchTerm] = useState("");                   // Stores user search text
+  const [showFilters, setShowFilters] = useState(false);              // Shows or hides the filter panel
+  const [selectedBadges, setSelectedBadges] = useState([]);           // Stores selected badge filters
+  const [selectedCategories, setSelectedCategories] = useState([]);   // Stores selected category filters
 
   // --------------------------------------------------------------------------
   // TOGGLE FUNCTIONS
-  // These handle multi-select: clicking adds item, clicking again removes it.
-  // prev.includes(item) checks if item is already selected.
-  // prev.filter(x => x !== item) removes the item from array.
-  // [...prev, item] adds item to end of array (spread operator).
+  // Generic toggle logic for multi-select arrays (Badges & Categories).
+  // Clicking adds item, clicking again removes it.
+  //
+  // HOW IT WORKS:
+  // 1. toggleItem: Accepts the item to toggle and the specific setState function.
+  // 2. prev.includes(item): Checks if item is already selected.
+  // 3. prev.filter(x => x !== item): Removes the item from array.
+  // 4. [...prev, item]: Adds item to end of array (spread operator).
   // --------------------------------------------------------------------------
-  const toggleBadge = (badge) => {
-    setSelectedBadges((prev) =>
-      prev.includes(badge)
-        ? prev.filter((b) => b !== badge)  // Remove if already selected
-        : [...prev, badge]                  // Add if not selected
+  const toggleItem = (item, setState) => {
+    setState(
+      (prev) =>
+        prev.includes(item)
+          ? prev.filter((x) => x !== item) // Remove if selected
+          : [...prev, item] // Add if not selected
     );
   };
 
-  const toggleCategory = (category) => {
-    setSelectedCategories((prev) =>
-      prev.includes(category)
-        ? prev.filter((c) => c !== category)
-        : [...prev, category]
-    );
-  };
+  const toggleBadge = (badge) => toggleItem(badge, setSelectedBadges);
+  const toggleCategory = (category) =>
+    toggleItem(category, setSelectedCategories);
 
   // --------------------------------------------------------------------------
   // FILTER LOGIC
-  // filter() creates new array with items that pass all conditions.
+  // filter() creates a new array containing items that pass all conditions.
   // toLowerCase() makes search case-insensitive ("Pizza" matches "pizza").
-  // includes() checks if string contains search term.
-  // length === 0 means "no filter selected" = show all.
+  // includes() checks if a string contains the search term.
+  // length === 0 means no filter selected, so all items are allowed.
   // --------------------------------------------------------------------------
   const filteredRestaurants = restaurants.filter((restaurant) => {
-    // Check if name or cuisine contains search term
+    // Check if name or cuisine matches the search term
     const matchesSearch =
       restaurant.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       restaurant.cuisine.toLowerCase().includes(searchTerm.toLowerCase());
 
-    // Check if restaurant's badge is in selected badges (or no filter = show all)
+    // Check if restaurant's badge matches selected badges (or none selected)
     const matchesBadge =
       selectedBadges.length === 0 || selectedBadges.includes(restaurant.badge);
 
-    // Check if restaurant's cuisine is in selected categories
+    // Check if restaurant's cuisine matches selected categories (or none selected)
     const matchesCategory =
       selectedCategories.length === 0 ||
       selectedCategories.includes(restaurant.cuisine);
 
-    // Restaurant must match ALL conditions to be shown
+    // Restaurant must match all conditions to be shown
     return matchesSearch && matchesBadge && matchesCategory;
   });
 
-  // Reset all filters to default state
+  // Clear all active filters and reset the search term to the default state
   const clearFilters = () => {
     setSelectedBadges([]);
     setSelectedCategories([]);
@@ -101,10 +98,7 @@ function Restaurants() {
   const hasActiveFilters =
     selectedBadges.length > 0 || selectedCategories.length > 0;
 
-  // --------------------------------------------------------------------------
-  // MAIN RENDER
-  // No conditional returns needed - data is always available!
-  // --------------------------------------------------------------------------
+  // MAIN RENDER: No conditional returns needed - data is always available!
   return (
     <section className="py-5 bg-light min-vh-100">
       <div className="container">
@@ -113,19 +107,16 @@ function Restaurants() {
           subtitle="Discover amazing restaurants near you"
         />
 
-        {/* ------------------------------------------------------------------ */}
-        {/* SEARCH & FILTER BAR                                                */}
-        {/* ------------------------------------------------------------------ */}
+        {/* SEARCH & FILTER BAR:          */}
         <div className="row justify-content-center mb-4">
           <div className="col-12 col-md-8">
             <div className="d-flex gap-2">
-
-              {/* Search Input - value is controlled by searchTerm state */}
-              {/* onChange updates state on every keystroke */}
+              {/* SEARCH INPUT – Controlled by searchTerm state and updated on every keystroke via onChange */}
               <div className="input-group shadow-sm rounded-pill overflow-hidden flex-grow-1">
                 <span className="input-group-text bg-white border-0 ps-4">
                   <i className="ri-search-line text-secondary"></i>
                 </span>
+
                 <input
                   type="text"
                   className="form-control border-0 py-3 shadow-none"
@@ -143,7 +134,9 @@ function Restaurants() {
                 onClick={() => setShowFilters(!showFilters)}
               >
                 <i className="ri-filter-2-line"></i>
+
                 <span className="d-none d-md-inline">Filters</span>
+
                 {/* Badge showing count of active filters */}
                 {hasActiveFilters && (
                   <span className="badge bg-danger rounded-pill">
@@ -155,99 +148,101 @@ function Restaurants() {
           </div>
         </div>
 
-        {/* ------------------------------------------------------------------ */}
-        {/* FILTER PANEL - Only shown when showFilters is true                 */}
-        {/* {condition && <Component />} renders Component only if true        */}
-        {/* ------------------------------------------------------------------ */}
+        {/* FILTER PANEL – Renders only when showFilters is true using conditional rendering */}
         {showFilters && (
           <div className="row justify-content-center mb-4">
             <div className="col-12 col-md-10">
               <div className="bg-white rounded-4 p-4 shadow-sm">
-
-                {/* Badge Filters */}
+                {/* Badge Filter Group */}
                 <div className="mb-4">
                   <h6 className="fw-bold mb-3 text-secondary">
                     <i className="ri-price-tag-3-line me-2"></i>By Badge
                   </h6>
                   <div className="d-flex flex-wrap gap-2">
                     {/* map() loops through badgeFilters array from filters.js */}
-                    {badgeFilters.map((badge) => (
-                      <button
-                        key={badge}
-                        className={`btn btn-sm rounded-pill px-3 ${
-                          selectedBadges.includes(badge)
-                            ? "btn-dark"
-                            : "btn-outline-secondary"
-                        }`}
-                        onClick={() => toggleBadge(badge)}
-                      >
-                        {/* Show checkmark if selected */}
-                        {selectedBadges.includes(badge) && (
-                          <i className="ri-check-line me-1"></i>
-                        )}
-                        {badge}
-                      </button>
-                    ))}
+                    {badgeFilters.map((badge) => {
+                      const isSelected = selectedBadges.includes(badge);
+                      return (
+                        <button
+                          key={badge}
+                          onClick={() => toggleBadge(badge)}
+                          className={`btn btn-sm rounded-pill px-3 ${
+                            isSelected ? "btn-dark" : "btn-outline-secondary"
+                          }`}
+                        >
+                          {isSelected && <i className="ri-check-line me-1"></i>}
+                          {badge}
+                        </button>
+                      );
+                    })}
                   </div>
                 </div>
 
-                {/* Category Filters - Grouped by Veg/Non-Veg */}
+                {/* Category Filter Group Header */}
                 <div className="mb-4">
                   <h6 className="fw-bold mb-3 text-secondary">
                     <i className="ri-restaurant-2-line me-2"></i>By Category
                   </h6>
 
-                  {/* Non-Veg Options */}
+                  {/* Non-Vegetarian Filter Group */}
                   <div className="mb-3">
                     <span className="badge bg-danger me-2 mb-2">Non-Veg</span>
                     <div className="d-flex flex-wrap gap-2">
-                      {categoryFilters["Non-Veg"].map((cat) => (
-                        <button
-                          key={cat}
-                          className={`btn btn-sm rounded-pill px-3 ${
-                            selectedCategories.includes(cat)
-                              ? "btn-danger"
-                              : "btn-outline-secondary"
-                          }`}
-                          onClick={() => toggleCategory(cat)}
-                        >
-                          {selectedCategories.includes(cat) && (
-                            <i className="ri-check-line me-1"></i>
-                          )}
-                          {cat}
-                        </button>
-                      ))}
+                      {categoryFilters["Non-Veg"].map((category) => {
+                        const isSelected =
+                          selectedCategories.includes(category);
+                        return (
+                          <button
+                            key={category}
+                            onClick={() => toggleCategory(category)}
+                            className={`btn btn-sm rounded-pill px-3 ${
+                              isSelected
+                                ? "btn-danger"
+                                : "btn-outline-secondary"
+                            }`}
+                          >
+                            {isSelected && (
+                              <i className="ri-check-line me-1"></i>
+                            )}
+                            {category}
+                          </button>
+                        );
+                      })}
                     </div>
                   </div>
 
-                  {/* Veg Options */}
+                  {/* Vegetarian Filter Group */}
                   <div>
                     <span className="badge bg-success me-2 mb-2">Veg</span>
                     <div className="d-flex flex-wrap gap-2">
-                      {categoryFilters["Veg"].map((cat) => (
-                        <button
-                          key={cat}
-                          className={`btn btn-sm rounded-pill px-3 ${
-                            selectedCategories.includes(cat)
-                              ? "btn-success"
-                              : "btn-outline-secondary"
-                          }`}
-                          onClick={() => toggleCategory(cat)}
-                        >
-                          {selectedCategories.includes(cat) && (
-                            <i className="ri-check-line me-1"></i>
-                          )}
-                          {cat}
-                        </button>
-                      ))}
+                      {categoryFilters["Veg"].map((category) => {
+                        const isSelected =
+                          selectedCategories.includes(category);
+                        return (
+                          <button
+                            key={category}
+                            onClick={() => toggleCategory(category)}
+                            className={`btn btn-sm rounded-pill px-3 ${
+                              isSelected
+                                ? "btn-success"
+                                : "btn-outline-secondary"
+                            }`}
+                          >
+                            {isSelected && (
+                              <i className="ri-check-line me-1"></i>
+                            )}
+                            {category}
+                          </button>
+                        );
+                      })}
                     </div>
                   </div>
                 </div>
 
-                {/* Clear All Button - only shown if filters are active */}
+                {/* Global Filter Reset */}
                 {hasActiveFilters && (
                   <button
-                    className="btn btn-link text-danger p-0"
+                    className="btn btn-link text-danger p-0 text-decoration-none"
                     onClick={clearFilters}
                   >
                     <i className="ri-close-circle-line me-1"></i>
@@ -259,9 +254,7 @@ function Restaurants() {
           </div>
         )}
 
-        {/* ------------------------------------------------------------------ */}
-        {/* ACTIVE FILTERS DISPLAY - Shows selected filters as removable tags  */}
-        {/* ------------------------------------------------------------------ */}
+        {/* ACTIVE FILTERS DISPLAY – Shows currently selected filters as removable tags */}
         {hasActiveFilters && (
           <div className="row justify-content-center mb-4">
             <div className="col-12 col-md-8">
@@ -300,20 +293,17 @@ function Restaurants() {
           </div>
         )}
 
-        {/* Results Count */}
+        {/* Result Status: Shows filtered count vs total count */}
         <div className="text-center mb-4">
           <small className="text-secondary">
-            Showing {filteredRestaurants.length} of {restaurants.length}{" "}
-            restaurants
+            {`Showing ${filteredRestaurants.length} of ${restaurants.length} restaurants`}
           </small>
         </div>
 
-        {/* ------------------------------------------------------------------ */}
-        {/* RESTAURANT CARDS GRID                                              */}
-        {/* row-cols-1: 1 card per row on mobile (12÷1=12 = 100% width)        */}
-        {/* row-cols-md-2: 2 cards per row on tablets (12÷2=6 = 50% each)      */}
-        {/* row-cols-lg-3: 3 cards per row on desktop (12÷3=4 = 33.33% each)   */}
-        {/* ------------------------------------------------------------------ */}
+        {/* RESTAURANT CARDS GRID:                                             */}
+        {/* row-cols-1:     1 card per row on mobile (12÷1=12  = 100% width)   */}
+        {/* row-cols-md-2:  2 cards per row on tablets (12÷2=6 = 50% each)     */}
+        {/* row-cols-lg-3:  3 cards per row on desktop (12÷3=4 = 33.33% each)  */}
         <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
           {filteredRestaurants.map((restaurant) => (
             <div className="col" key={restaurant.id}>
@@ -335,12 +325,11 @@ function Restaurants() {
           ))}
         </div>
 
-        {/* ------------------------------------------------------------------ */}
-        {/* EMPTY STATE - Shown when no restaurants match filters              */}
-        {/* ------------------------------------------------------------------ */}
+        {/* No Results Fallback: Feedback message & reset button */}
         {filteredRestaurants.length === 0 && (
           <div className="text-center py-5">
             <i className="ri-restaurant-line fs-1 text-secondary"></i>
+
             <p className="text-secondary mt-3">No restaurants found</p>
             {hasActiveFilters && (
               <button

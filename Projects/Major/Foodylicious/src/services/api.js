@@ -7,9 +7,7 @@
 // Base URL for all API calls
 const BASE_URL = 'https://www.themealdb.com/api/json/v1/1';
 
-// ════════════════════════════════════════════════════════════════════════════
 // LOOKUP TABLES (like a dictionary - look up a key, get a value)
-// ════════════════════════════════════════════════════════════════════════════
 
 // Category → Restaurant Image
 const restaurantImages = {
@@ -64,9 +62,7 @@ const availableBadges = [
 
 
 
-// ════════════════════════════════════════════════════════════════════════════
-// HELPER FUNCTIONS
-// ════════════════════════════════════════════════════════════════════════════
+// HELPER FUNCTIONS:
 
 // Generate a fake price from meal ID (same meal = same price every time)
 const generatePrice = (mealId) => {
@@ -143,9 +139,7 @@ const shortenText = (text, maxLength) => {
 
 
 
-// ════════════════════════════════════════════════════════════════════════════
-// FETCH RESTAURANTS
-// ════════════════════════════════════════════════════════════════════════════
+// FETCH RESTAURANTS:
 export const fetchRestaurants = async () => {
   try {
     // Step 1: Make API request
@@ -213,9 +207,7 @@ export const fetchRestaurants = async () => {
 
 
 
-// ════════════════════════════════════════════════════════════════════════════
 // FETCH MENU BY CATEGORY
-// ════════════════════════════════════════════════════════════════════════════
 export const fetchMenuByCategory = async (category, restaurantName) => {
   // Guard: Stop if no category provided
   if (!category) {
@@ -281,9 +273,7 @@ export const fetchMenuByCategory = async (category, restaurantName) => {
 
 
 
-// ════════════════════════════════════════════════════════════════════════════
 // FETCH MEAL DETAILS
-// ════════════════════════════════════════════════════════════════════════════
 export const fetchMealDetails = async (mealId) => {
   try {
     // Step 1: Make API request

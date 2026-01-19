@@ -7,8 +7,7 @@ import Menu from "../components/Menu";
 import ChefSelection from "../components/ChefSelection";
 import Contact from "../components/Contact";
 
-// HOME COMPONENT:
-// Uses a React Fragment (<>...</>) as an invisible wrapper so multiple elements can be returned without adding extra HTML to the DOM.
+// HOME COMPONENT: Uses a React Fragment (<>...</>) as an invisible wrapper so multiple elements can be returned without adding extra HTML to the DOM.
 function Home() {
   return (
     <>
